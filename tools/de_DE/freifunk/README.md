@@ -1,4 +1,4 @@
-nodes.json Files are generated for Freifunk Map-Servers and contains
+nodes.json Files are generated for Freifunk Map-Servers and contain
 all precise information about Routers that provide free wifi Access in Germany 
 
 For more info see www.freifunk.net
