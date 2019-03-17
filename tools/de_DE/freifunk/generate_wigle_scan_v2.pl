@@ -74,6 +74,8 @@ if ( -f $filename ){
                 for (my $i = 0; $i < $nodecounter_max; $i++){
 		   my $mac_found = 0;
                    my $location_found = 0;  
+                   my $latitude_found = 0;
+                   my $longitude_found = 0;
                    my $latitude = 0;
                    my $longitude = 0;
                    my $altitude = 0;
@@ -97,11 +99,17 @@ if ( -f $filename ){
                         $mac_found = 1;                  
                      }
 	    	     if ( $content->{'nodes'}->[$i]->{'nodeinfo'}->{'location'}  ) {
-	    	        $longitude =$content->{'nodes'}->[$i]->{'nodeinfo'}->{'location'}->{'longitude'};
-			$latitude = $content->{'nodes'}->[$i]->{'nodeinfo'}->{'location'}->{'latitude'};
-			if  ( $content->{'nodes'}->[$i]->{'nodeinfo'}->{'location'}->{'altitude'}  ) {
+	    	        if ($content->{'nodes'}->[$i]->{'nodeinfo'}->{'location'}->{'longitude'}){
+                             $longitude =$content->{'nodes'}->[$i]->{'nodeinfo'}->{'location'}->{'longitude'};
+		             $longitude_found = 1;	
+                        }
+                        if ($content->{'nodes'}->[$i]->{'nodeinfo'}->{'location'}->{'latitude'}){
+                           $latitude = $content->{'nodes'}->[$i]->{'nodeinfo'}->{'location'}->{'latitude'};
+			   $latitude_found = 1;
+                        }
+                        if  ( $content->{'nodes'}->[$i]->{'nodeinfo'}->{'location'}->{'altitude'}  ) {
 			    $altitude = $content->{'nodes'}->[$i]->{'nodeinfo'}->{'location'}->{'altitude'}; 
-			} else {
+                        } else {
 		           $altitude = 0; 
                         }
                         $location_found = 1;
@@ -109,7 +117,11 @@ if ( -f $filename ){
 	             # check needed values
                          if ( $mac_found ){
                             if ( $location_found ){
-                              print $wa $mac_prefix.$mac_new.",Freifunk,[ESS],".$wigletimestamp.",5,-45,".$latitude.",".$longitude.",".$altitude.",0,WIFI\n";
+                              if ( $latitude_found ){ 
+                                if ( $longitude_found ){ 
+                                    print $wa $mac_prefix.$mac_new.",Freifunk,[ESS],".$wigletimestamp.",5,-45,".$latitude.",".$longitude.",".$altitude.",0,WIFI\n";
+                                } 
+			      }
                             }
                          }
                  
@@ -123,6 +135,7 @@ if ( -f $filename ){
 
 
 exit 0;
+
 
 
 
