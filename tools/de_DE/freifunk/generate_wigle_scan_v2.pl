@@ -13,6 +13,7 @@ use POSIX qw(strftime);
 
 # define default runtime vars
 my $filename = $ARGV[0];
+my $channel = $ARGV[1];
 # Timestamp Format 2019-02-15T02:22:16+0100
 my $date = strftime "%Y%m%d", localtime;
 my $wigledate = strftime "%Y-%m-%d", localtime;
@@ -27,8 +28,8 @@ my $nodesfound = 0;
 my $created_on;
 # my $filename = "nodes.json";
 
-if ( ! $filename ) {
-                print "USAGE: ./nodesv2tov1.pl <in_nodes_v2_filename> \n";
+if (( ! $filename ) || ( ! $channel)){
+                print "USAGE: ./generate_wigle_scan_v2.pl <in_nodes_v2_filename> <Wifi-Channel>\n";
 	        exit 0;        
 	}
 
@@ -119,7 +120,7 @@ if ( -f $filename ){
                             if ( $location_found ){
                               if ( $latitude_found ){ 
                                 if ( $longitude_found ){ 
-                                    print $wa $mac_prefix.$mac_new.",Freifunk,[ESS],".$wigletimestamp.",5,-45,".$latitude.",".$longitude.",".$altitude.",0,WIFI\n";
+                                    print $wa $mac_prefix.$mac_new.",Freifunk,[ESS],".$wigletimestamp.",".$channel.",-45,".$latitude.",".$longitude.",".$altitude.",0,WIFI\n";
                                 } 
 			      }
                             }
