@@ -5,11 +5,11 @@ For more info see www.freifunk.net
 
 Channels may differ between the different Freifunk communities. Get Community nodes.json file from Mapserver, check for Wifi Channel config in Community github/site.conf and generate:
 
-#"./generate_wigle_scan_v2.pl nodes-v2-filename Wifi-Channel" 
+#"./generate_wigle_scan_v2.pl      nodes-v2-filename     Wifi-Channel" 
 
   or for old v1-format:
 
-#"./generate_wigle_scan_v1.pl nodes-v1-filename Wifi-Channel"
+#"./generate_wigle_scan_v1.pl      nodes-v1-filename     Wifi-Channel"
  
  
 cause we have router's exact position, we can assume -45 RSSI and 0 AccuracyMeters  
